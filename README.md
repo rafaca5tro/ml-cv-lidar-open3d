@@ -1,29 +1,46 @@
-# Obstacle detection using Open3D.
+# LiDAR Obstacle Detection (Open3D)
 
-![detection_gif](./results/data_1.gif)
+![Status](https://img.shields.io/badge/status-learning-blue?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
 
-This repository aims to be useful guide on how you can perform point cloud processing using the Open3D library in Python, with scripts and with notebooks. The processing here used is a simple but useful analysis of pcd files to extract information.
+> Point cloud processing and obstacle detection using Open3D library with LiDAR data.
 
-Files:
-- **render**: final state of processing for each lidar reading.
-- **sensors/data_1**: pcd files (lidar readings)
-- **poetry.lock**: necessary packages to run the example
-- **processing.py**: step-by-step processing script
-- **lidar_thread.py**: using the Open3D's Application GUI we create a visualization window to see the whole sensor reading and processing sequence
-- **lidar_processing.ipynb**: step-by-step processing python notebook
+Jupyter notebooks and Python scripts for voxel grid filtering, RANSAC plane segmentation, road/obstacle separation, DBScan clustering, and bounding box visualization from LiDAR sensor data.
 
-Processing steps:
-1. Filtering the initial point cloud. Using voxel grid filtering, we reduce the number of points in the point cloud.
-2. Cropping points outside the region of interest.
-3. Removing points that belong to the "car's" roof.
-4. Separating the road from obstacles. We perform Plane segmentation to achieve this goal. Using the RANSAC algorithm we can find the plane with the largest support in the point cloud.
-5. Applying clustering to split the input point cloud. We separate each detected obstacle and get its correspondent points using the DBScan Algorithm.
-6. Determining and drawing the bounding boxes for the obstacles in the point cloud.
+---
 
-To install Open3D:
-- Refer to the official package documentation http://www.open3d.org/docs/release/
-- But pip install open3d should be enough (this includes jupyter)
-- Only matplotlib is the other essential package that requires manual installation
+## Topics Covered
 
-Special mention:
-- Special thanks to Udacity for providing a number of useful .pcd lidar sensor readings: https://github.com/udacity/SFND_Lidar_Obstacle_Detection
+- Voxel grid filtering for point cloud reduction
+- Region of interest cropping
+- RANSAC plane segmentation (road detection)
+- Road vs. obstacle separation
+- DBScan clustering for obstacle grouping
+- Bounding box generation and 3D visualization
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Language | Python |
+| 3D Library | Open3D |
+| Data | NumPy, matplotlib |
+| Package Manager | Poetry |
+| Dataset | Udacity LiDAR .pcd files |
+
+---
+
+## Getting Started
+
+```bash
+poetry install
+jupyter notebook
+```
+
+---
+
+## License
+
+MIT
