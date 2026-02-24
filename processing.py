@@ -1,11 +1,19 @@
+import argparse
 import open3d as o3d
 import numpy as np
 import matplotlib.pyplot as plt
 from pathlib import Path
 
+# Configure data path (override with --pcd-file argument)
+DEFAULT_PCD_FILE = "sensors/data_1/0000000000.pcd"
+
+parser = argparse.ArgumentParser(description="LiDAR Point Cloud Processing Pipeline")
+parser.add_argument("--pcd-file", type=str, default=DEFAULT_PCD_FILE,
+                    help="Path to .pcd point cloud file")
+args = parser.parse_args()
 
 print("Load a pcd point cloud, print it, and render it")
-pcd = o3d.io.read_point_cloud("/home/henry/2021/lidar-detection/open3d_test_lidar/sensors/data_1/0000000000.pcd")
+pcd = o3d.io.read_point_cloud(args.pcd_file)
 print(pcd)
 print(np.asarray(pcd.points))
 o3d.visualization.draw_geometries(
@@ -42,7 +50,7 @@ o3d.visualization.draw_geometries(
     [croppcd]
 )
 
-print("Getting the roff points")
+print("Getting the roof points")
 roof_bbox = o3d.geometry.AxisAlignedBoundingBox(
     min_bound=(-1.5, -1.7, -1.0), 
     max_bound=(2.6, 1.7, -0.4)
